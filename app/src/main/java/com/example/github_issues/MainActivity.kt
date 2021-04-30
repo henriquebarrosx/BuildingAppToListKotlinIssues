@@ -16,7 +16,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initAdapterModules() {
-        issueAdapter = IssueAdapter(mutableListOf())
+        issueAdapter = IssueAdapter(
+            mutableListOf(
+                Issue(
+                    "Creating a new issue",
+                    "open",
+                    "1d"
+                ),
+                Issue(
+                "Closing a new issue",
+                    "closed",
+                    "13d"
+                )
+            )
+        )
 
         rvIssueItems.adapter = issueAdapter
         rvIssueItems.layoutManager = LinearLayoutManager(this)
