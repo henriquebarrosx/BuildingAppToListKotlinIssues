@@ -45,9 +45,9 @@ class IssueAdapter(
 
         holder.itemView.apply {
             issue_item_title.text = currentIssue.title
-            issue_item_status.text = currentIssue.status
-            issue_item_created_at.text = currentIssue.createdAt
-            handleStatusColor(issue_item_status, currentIssue.status)
+            issue_item_status.text = currentIssue.state
+            issue_item_created_at.text = currentIssue.created_at
+            handleStatusColor(issue_item_status, currentIssue.state)
         }
     }
 }

@@ -1,14 +1,16 @@
 package com.example.github_issues
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.squareup.okhttp.*
-import kotlinx.android.synthetic.main.activity_main.*
 import java.io.IOException
-
+import com.squareup.okhttp.*
+import com.google.gson.GsonBuilder
+import java.lang.IllegalArgumentException
+import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity_main.*
+import androidx.recyclerview.widget.LinearLayoutManager
 
 class MainActivity : AppCompatActivity() {
+    private var issues = mutableListOf<Issue>()
     private lateinit var issueAdapter: IssueAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,21 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initAdapterModules() {
         requestIssues()
-
-        issueAdapter = IssueAdapter(
-            mutableListOf(
-                Issue(
-                    "This is a opened issue",
-                    "open",
-                    "13d"
-                ),
-                Issue(
-                    "This is a closed issue",
-                    "closed",
-                    "1d"
-                )
-            )
-        )
+        issueAdapter = IssueAdapter(issues)
 
         rvIssueItems.adapter = issueAdapter
         rvIssueItems.layoutManager = LinearLayoutManager(this)
@@ -45,15 +33,25 @@ class MainActivity : AppCompatActivity() {
         val promiseBuilder = Request.Builder().url(promiseURL).build()
         val promise = OkHttpClient()
 
-        val data = mutableListOf<Issue>()
-
-        promise.newCall(promiseBuilder).enqueue(object : Callback {
+        val data = promise.newCall(promiseBuilder).enqueue(object : Callback {
             override fun onFailure(request: Request?, e: IOException?) {
+                throw IllegalArgumentException()
             }
 
             override fun onResponse(response: Response) {
+                if (response.isSuccessful) {
+                    val convert = GsonBuilder().create()
+                    val resStr = response.body().string()
+
+                    val resJSON = convert
+                        .fromJson(resStr, Array<Issue>::class.java)
+                        .toMutableList()
+
+                }
             }
         })
+
+        println("-> $data")
 
     }
 }
