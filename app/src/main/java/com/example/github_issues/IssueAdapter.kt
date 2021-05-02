@@ -68,11 +68,11 @@ class IssueAdapter(
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun manageTime(createdAt: LocalDateTime, now: LocalDateTime): String {
-        val minutes: Int = getMinutes(createdAt, now).toInt()
-        val hours: Int = getHours(createdAt, now).toInt()
-        val days: Int = getDays(createdAt, now).toInt()
-        val months: Int = getMonths(createdAt, now).toInt()
-        val years: Int = getYears(createdAt, now).toInt()
+        val minutes: Int = getMinutes(createdAt, now)
+        val hours: Int = getHours(createdAt, now)
+        val days: Int = getDays(createdAt, now)
+        val months: Int = getMonths(createdAt, now)
+        val years: Int = getYears(createdAt, now)
 
         return when {
             days <= 0 && hours < 1 -> "${minutes}m"
@@ -85,28 +85,28 @@ class IssueAdapter(
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun getMinutes(startDate: LocalDateTime, endDate: LocalDateTime): Long {
-        return ChronoUnit.MINUTES.between(startDate, endDate)
+    private fun getMinutes(startDate: LocalDateTime, endDate: LocalDateTime): Int {
+        return ChronoUnit.MINUTES.between(startDate, endDate).toInt()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun getHours(startDate: LocalDateTime, endDate: LocalDateTime): Long {
-        return ChronoUnit.HOURS.between(startDate, endDate)
+    private fun getHours(startDate: LocalDateTime, endDate: LocalDateTime): Int {
+        return ChronoUnit.HOURS.between(startDate, endDate).toInt()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun getDays(startDate: LocalDateTime, endDate: LocalDateTime): Long {
-        return ChronoUnit.DAYS.between(startDate, endDate)
+    private fun getDays(startDate: LocalDateTime, endDate: LocalDateTime): Int {
+        return ChronoUnit.DAYS.between(startDate, endDate).toInt()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun getMonths(startDate: LocalDateTime, endDate: LocalDateTime): Long {
-        return ChronoUnit.MONTHS.between(startDate, endDate)
+    private fun getMonths(startDate: LocalDateTime, endDate: LocalDateTime): Int {
+        return ChronoUnit.MONTHS.between(startDate, endDate).toInt()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun getYears(startDate: LocalDateTime, endDate: LocalDateTime): Long {
-        return ChronoUnit.YEARS.between(startDate, endDate)
+    private fun getYears(startDate: LocalDateTime, endDate: LocalDateTime): Int {
+        return ChronoUnit.YEARS.between(startDate, endDate).toInt()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
