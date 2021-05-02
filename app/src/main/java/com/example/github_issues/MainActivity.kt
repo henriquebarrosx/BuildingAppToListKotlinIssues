@@ -21,21 +21,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun requestIssues(context: Context) {
+        val promise = OkHttpClient()
         val promiseURL = "https://api.github.com/repos/JetBrains/kotlin/issues"
         val promiseBuilder = Request.Builder().url(promiseURL).build()
-        val promise = OkHttpClient()
 
         promise.newCall(promiseBuilder).enqueue(object : Callback {
-            override fun onFailure(request: Request?, e: IOException?) {
+            override fun onFailure(request: Request?, expection: IOException?) {
                 throw IllegalArgumentException()
             }
 
             override fun onResponse(response: Response) {
                 val convert = GsonBuilder().create()
-                val resStr = response.body().string()
+                val responseStr = response.body().string()
 
                 val resJSON = convert
-                        .fromJson(resStr, Array<Issue>::class.java)
+                        .fromJson(
+                                responseStr,
+                                Array<Issue>::class.java
+                        )
                         .toMutableList()
 
                 runOnUiThread {

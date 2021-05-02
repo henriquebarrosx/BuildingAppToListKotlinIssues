@@ -1,28 +1,35 @@
 package com.example.github_issues
 
+import android.os.Build
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.view.LayoutInflater
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.issue_item.view.*
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
 
 
 class IssueAdapter(
-    private val issues: MutableList<Issue>
+        private val issues: MutableList<Issue>
 ): RecyclerView.Adapter<IssueAdapter.IssueViewHolder>() {
 
     class IssueViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IssueViewHolder {
         return IssueViewHolder(
-            LayoutInflater
-                .from(parent.context)
-                .inflate(
-                    R.layout.issue_item,
-                    parent,
-                    false
-                )
+                LayoutInflater
+                        .from(parent.context)
+                        .inflate(
+                                R.layout.issue_item,
+                                parent,
+                                false
+                        )
         )
     }
 
@@ -36,17 +43,80 @@ class IssueAdapter(
         tvIssueStatus.setBackgroundResource(resource)
     }
 
+    private fun compressText(title: String): String {
+        val limitSize = 30
+        val tooLong = title.length >= limitSize
+        return if(tooLong) "${title.substring(0, limitSize)}..." else title
+    }
+
     private fun getResourceByStatus(isOpened: Boolean): Int {
         return if(isOpened) R.drawable.opened_issue else R.drawable.closed_issue
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun formatDate(date: String): String {
+        val today = LocalDateTime.now()
+
+        val dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")
+        val parsedDate = LocalDateTime.parse(date, dateFormat)
+
+        val formatter =  DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
+        val nowStr = LocalDateTime.parse(formatter.format(today), formatter)
+
+        return manageTime(parsedDate, nowStr)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun manageTime(createdAt: LocalDateTime, now: LocalDateTime): String {
+        val minutes: Int = getMinutes(createdAt, now).toInt()
+        val hours: Int = getHours(createdAt, now).toInt()
+        val days: Int = getDays(createdAt, now).toInt()
+        val months: Int = getMonths(createdAt, now).toInt()
+        val years: Int = getYears(createdAt, now).toInt()
+
+        return when {
+            days <= 0 && hours < 1 -> "${minutes}m"
+            days <= 0 && hours >= 1 -> "${hours}h"
+            days <= 30 -> "${days}d"
+            days > 30 -> "${months}mo"
+            days > 365 -> "${years}y"
+            else -> "${days}d"
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun getMinutes(startDate: LocalDateTime, endDate: LocalDateTime): Long {
+        return ChronoUnit.MINUTES.between(startDate, endDate)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun getHours(startDate: LocalDateTime, endDate: LocalDateTime): Long {
+        return ChronoUnit.HOURS.between(startDate, endDate)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun getDays(startDate: LocalDateTime, endDate: LocalDateTime): Long {
+        return ChronoUnit.DAYS.between(startDate, endDate)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun getMonths(startDate: LocalDateTime, endDate: LocalDateTime): Long {
+        return ChronoUnit.MONTHS.between(startDate, endDate)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun getYears(startDate: LocalDateTime, endDate: LocalDateTime): Long {
+        return ChronoUnit.YEARS.between(startDate, endDate)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: IssueViewHolder, position: Int) {
         val currentIssue = issues[position]
 
         holder.itemView.apply {
-            issue_item_title.text = currentIssue.title
             issue_item_status.text = currentIssue.state
-            issue_item_created_at.text = currentIssue.created_at
+            issue_item_title.text = compressText(currentIssue.title)
+            issue_item_created_at.text = formatDate(currentIssue.created_at)
             handleStatusColor(issue_item_status, currentIssue.state)
         }
     }
