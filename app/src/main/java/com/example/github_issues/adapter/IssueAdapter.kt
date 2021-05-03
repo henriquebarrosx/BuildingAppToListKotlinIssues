@@ -1,4 +1,4 @@
-package com.example.github_issues
+package com.example.github_issues.adapter
 
 import android.os.Build
 import android.view.LayoutInflater
@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
+import com.example.github_issues.R
+import com.example.github_issues.entity.Issue
 import kotlinx.android.synthetic.main.issue_item.view.*
-import java.time.LocalDate
 import java.time.LocalDateTime
-import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 

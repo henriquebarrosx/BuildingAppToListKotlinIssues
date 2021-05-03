@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="88dp"
-    android:layout_width="match_parent"
-    android:paddingVertical="16dp"
-    android:paddingHorizontal="20dp"
-    android:background="@drawable/issue_item_border"
-    android:foreground="?android:attr/selectableItemBackground"
     android:clickable="true"
     android:focusable="true"
+    android:layout_height="88dp"
     android:id="@+id/issue_item"
+    android:paddingVertical="16dp"
+    android:paddingHorizontal="20dp"
+    android:layout_width="match_parent"
+    android:background="@drawable/issue_item_border"
+    android:foreground="?android:attr/selectableItemBackground"
     >
 
     <TextView
@@ -19,8 +18,9 @@
         android:textColor="#424141"
         android:layout_height="21dp"
         android:id="@+id/issue_item_title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/issue_title_example"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:textSize="12sp"
@@ -31,9 +31,10 @@
         android:id="@+id/issue_item_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/issue_status_example"
         android:background="@drawable/closed_issue"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <TextView
         android:gravity="end"
@@ -45,6 +46,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/issue_item_created_at"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/issue_created_at_example" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

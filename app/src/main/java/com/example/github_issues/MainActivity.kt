@@ -1,16 +1,16 @@
 package com.example.github_issues
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import java.io.IOException
 import com.squareup.okhttp.*
 import com.google.gson.GsonBuilder
 import java.lang.IllegalArgumentException
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
 import kotlinx.android.synthetic.main.activity_main.*
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.github_issues.adapter.IssueAdapter
+import com.example.github_issues.entity.Issue
 import kotlinx.android.synthetic.main.issue_item.*
 
 class MainActivity : AppCompatActivity() {

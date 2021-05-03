@@ -1,4 +1,4 @@
-package com.example.github_issues
+package com.example.github_issues.entity
 
 data class Issue(
     val title: String,
