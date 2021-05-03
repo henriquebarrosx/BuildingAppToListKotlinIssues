@@ -7,6 +7,10 @@
     android:paddingVertical="16dp"
     android:paddingHorizontal="20dp"
     android:background="@drawable/issue_item_border"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:id="@+id/issue_item"
     >
 
     <TextView
@@ -14,17 +18,15 @@
         android:layout_width="0dp"
         android:textColor="#424141"
         android:layout_height="21dp"
-        android:text="Example Title"
         android:id="@+id/issue_item_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:textSize="11sp"
+        android:textSize="12sp"
         android:textStyle="bold"
         android:textAllCaps="true"
         android:paddingVertical="5dp"
-        android:text="Example Status"
         android:paddingHorizontal="10dp"
         android:id="@+id/issue_item_status"
         android:layout_width="wrap_content"
@@ -34,14 +36,13 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:text="1d"
+        android:gravity="end"
         android:textSize="13sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:textColor="#424141"
         android:letterSpacing="0.12"
-        android:textAlignment="center"
-        android:gravity="center_horizontal"
+        android:textAlignment="textEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/issue_item_created_at"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
