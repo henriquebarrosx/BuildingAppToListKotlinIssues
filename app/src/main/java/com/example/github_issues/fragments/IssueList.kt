@@ -1,4 +1,4 @@
-package com.example.github_issues
+package com.example.github_issues.fragments
 
 import java.util.*
 import android.os.Bundle
@@ -9,19 +9,15 @@ import android.view.ViewGroup
 import android.content.Context
 import android.view.LayoutInflater
 import com.google.gson.GsonBuilder
-import android.annotation.SuppressLint
+import com.example.github_issues.R
 import androidx.fragment.app.Fragment
+import android.annotation.SuppressLint
 import com.example.github_issues.entity.Issue
 import com.example.github_issues.adapter.IssueAdapter
-import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.issue_item.view.*
+import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_issue_list.*
 
-/**
- * A simple [Fragment] subclass.
- * Use the [IssueList.newInstance] factory method to
- * create an instance of this fragment.
- */
 class IssueList : Fragment() {
     private lateinit var issueAdapter: IssueAdapter
 

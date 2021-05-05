@@ -6,20 +6,19 @@
   app:startDestination="@id/issueList">
     <fragment
       android:id="@+id/issueList"
-      android:name="com.example.github_issues.IssueList"
+      android:name="com.example.github_issues.fragments.IssueList"
       android:label="fragment_issue_list"
       tools:layout="@layout/fragment_issue_list" >
 
         <action
           android:id="@+id/navigateToDetails"
           app:destination="@id/issueDetails"
-          app:popUpTo="@id/issueList"
-          app:popUpToInclusive="true" />
+          app:popUpToInclusive="false" />
     </fragment>
 
     <fragment
       android:id="@+id/issueDetails"
-      android:name="com.example.github_issues.IssueDetails"
+      android:name="com.example.github_issues.fragments.IssueDetails"
       android:label="fragment_issue_details"
       tools:layout="@layout/fragment_issue_details" >
 
