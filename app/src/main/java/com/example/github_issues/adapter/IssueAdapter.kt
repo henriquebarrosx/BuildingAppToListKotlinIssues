@@ -1,20 +1,20 @@
 package com.example.github_issues.adapter
 
 import android.os.Build
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.annotation.RequiresApi
-import androidx.navigation.findNavController
-import androidx.recyclerview.widget.RecyclerView
-import com.example.github_issues.R
-import com.example.github_issues.entity.Issue
-import kotlinx.android.synthetic.main.issue_item.view.*
 import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
+import android.view.LayoutInflater
+import com.example.github_issues.R
 import java.time.temporal.ChronoUnit
-
+import androidx.navigation.Navigation
+import androidx.annotation.RequiresApi
+import java.time.format.DateTimeFormatter
+import com.example.github_issues.entity.Issue
+import androidx.recyclerview.widget.RecyclerView
+import com.example.github_issues.IssueListDirections
+import kotlinx.android.synthetic.main.issue_item.view.*
 
 class IssueAdapter(
         private val issues: MutableList<Issue>
@@ -119,6 +119,11 @@ class IssueAdapter(
             issue_item_title.text = compressText(currentIssue.title)
             issue_item_created_at.text = formatDate(currentIssue.created_at)
             handleStatusColor(issue_item_status, currentIssue.state)
+
+            issue_item.setOnClickListener {
+                val action = IssueListDirections.navigateToDetails(currentIssue.toString())
+                Navigation.findNavController(this).navigate(action)
+            }
         }
     }
 }

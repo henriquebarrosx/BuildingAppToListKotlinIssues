@@ -7,21 +7,15 @@ import java.io.IOException
 import com.squareup.okhttp.*
 import android.view.ViewGroup
 import android.content.Context
-import io.reactivex.Completable
 import android.view.LayoutInflater
 import com.google.gson.GsonBuilder
-import java.util.concurrent.TimeUnit
-import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
 import android.annotation.SuppressLint
-import io.reactivex.schedulers.Schedulers
+import androidx.fragment.app.Fragment
 import com.example.github_issues.entity.Issue
 import com.example.github_issues.adapter.IssueAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.issue_item.view.*
-import io.reactivex.observers.DisposableCompletableObserver
 import kotlinx.android.synthetic.main.fragment_issue_list.*
-
 
 /**
  * A simple [Fragment] subclass.
@@ -42,23 +36,7 @@ class IssueList : Fragment() {
             false
         )
 
-        // This approach doesn't work when use try navigate to previous screen and click in issue again
-        Completable.complete()
-            .delay(2, TimeUnit.SECONDS, Schedulers.io())
-            .subscribeWith(object : DisposableCompletableObserver() {
-                override fun onStart() {
-                    requestIssues(context)
-                }
-
-                override fun onError(error: Throwable) {
-                    error.printStackTrace()
-                }
-
-                override fun onComplete() {
-                    setListenerToEachItemOnTheList(view)
-                }
-            })
-
+        requestIssues(context)
         return view
     }
 
@@ -80,7 +58,6 @@ class IssueList : Fragment() {
                     .fromJson(responseStr, Array<Issue>::class.java)
                     .toMutableList()
 
-
                 activity?.runOnUiThread {
                     issueAdapter = IssueAdapter(resJSON)
                     rvIssueItems.adapter = issueAdapter
@@ -88,13 +65,6 @@ class IssueList : Fragment() {
                 }
             }
         })
-
-    }
-
-    private fun setListenerToEachItemOnTheList(view: View) {
-        view.issue_item.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.navigateToDetails)
-        }
     }
 }
 
