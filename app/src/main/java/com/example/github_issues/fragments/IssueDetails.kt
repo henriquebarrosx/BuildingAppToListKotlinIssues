@@ -36,4 +36,6 @@ class IssueDetails : Fragment() {
 
         return view
     }
+
+
 }
