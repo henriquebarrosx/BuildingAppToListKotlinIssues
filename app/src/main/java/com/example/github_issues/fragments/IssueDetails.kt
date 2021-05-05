@@ -9,10 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.fragment.navArgs
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import kotlinx.android.synthetic.main.fragment_issue_details.view.*
-import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.navigation.fragment.findNavController
+import kotlinx.android.synthetic.main.fragment_issue_details.view.*
 
 class IssueDetails : Fragment() {
     private val args: IssueDetailsArgs by navArgs()
@@ -26,7 +24,6 @@ class IssueDetails : Fragment() {
             container,
             false
         )
-
 
         val issue = args.issueArgs
         view.details_text.text = issue
