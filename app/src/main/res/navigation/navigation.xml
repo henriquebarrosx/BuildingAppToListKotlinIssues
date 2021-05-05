@@ -11,13 +11,17 @@
             tools:layout="@layout/fragment_issue_list" >
         <action
                 android:id="@+id/navigateToDetails"
-                app:destination="@id/issueDetails"
-                app:popUpTo="@id/navigation"
-                app:popUpToInclusive="true" />
+                app:destination="@id/issueDetails" />
     </fragment>
     <fragment
             android:id="@+id/issueDetails"
             android:name="com.example.github_issues.IssueDetails"
             android:label="fragment_issue_details"
-            tools:layout="@layout/fragment_issue_details" />
+            tools:layout="@layout/fragment_issue_details" >
+        <action
+                android:id="@+id/action_issueDetails_to_issueList"
+                app:destination="@id/issueList"
+                app:popUpTo="@id/issueList"
+                app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

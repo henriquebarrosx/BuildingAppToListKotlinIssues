@@ -1,28 +1,26 @@
 package com.example.github_issues
 
-import android.annotation.SuppressLint
-import android.content.Context
+import java.util.*
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
+import java.io.IOException
+import com.squareup.okhttp.*
 import android.view.ViewGroup
+import android.content.Context
+import io.reactivex.Completable
+import android.view.LayoutInflater
+import com.google.gson.GsonBuilder
+import java.util.concurrent.TimeUnit
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.github_issues.adapter.IssueAdapter
-import com.example.github_issues.entity.Issue
-import com.google.gson.GsonBuilder
-import com.squareup.okhttp.Callback
-import com.squareup.okhttp.OkHttpClient
-import com.squareup.okhttp.Request
-import com.squareup.okhttp.Response
+import android.annotation.SuppressLint
 import io.reactivex.schedulers.Schedulers
-import io.reactivex.Observable
-import kotlinx.android.synthetic.main.fragment_issue_list.*
+import com.example.github_issues.entity.Issue
+import com.example.github_issues.adapter.IssueAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.issue_item.view.*
-import java.io.IOException
-import java.util.*
-import java.util.concurrent.TimeUnit
+import io.reactivex.observers.DisposableCompletableObserver
+import kotlinx.android.synthetic.main.fragment_issue_list.*
 
 
 /**
@@ -44,22 +42,27 @@ class IssueList : Fragment() {
             false
         )
 
-        val context = container?.context
-        requestIssues(context, view)
+        // This approach doesn't work when use try navigate to previous screen and click in issue again
+        Completable.complete()
+            .delay(2, TimeUnit.SECONDS, Schedulers.io())
+            .subscribeWith(object : DisposableCompletableObserver() {
+                override fun onStart() {
+                    requestIssues(context)
+                }
 
-        Observable
-            .timer(2000, TimeUnit.MILLISECONDS)
-            .subscribeOn(Schedulers.io())
-            .map {
-                setListenerToEachItemOnTheList(view)
-            }
-            .subscribe()
+                override fun onError(error: Throwable) {
+                    error.printStackTrace()
+                }
 
+                override fun onComplete() {
+                    setListenerToEachItemOnTheList(view)
+                }
+            })
 
         return view
     }
 
-    private fun requestIssues(context: Context?, view: View) {
+    private fun requestIssues(context: Context?) {
         val promise = OkHttpClient()
         val promiseURL = "https://api.github.com/repos/JetBrains/kotlin/issues"
         val promiseBuilder = Request.Builder().url(promiseURL).build()
