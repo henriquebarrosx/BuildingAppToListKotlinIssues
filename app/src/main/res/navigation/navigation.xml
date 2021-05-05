@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/navigation"
+        app:startDestination="@id/issueList">
+    <fragment
+            android:id="@+id/issueList"
+            android:name="com.example.github_issues.IssueList"
+            android:label="fragment_issue_list"
+            tools:layout="@layout/fragment_issue_list" >
+        <action
+                android:id="@+id/navigateToDetails"
+                app:destination="@id/issueDetails"
+                app:popUpTo="@id/navigation"
+                app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+            android:id="@+id/issueDetails"
+            android:name="com.example.github_issues.IssueDetails"
+            android:label="fragment_issue_details"
+            tools:layout="@layout/fragment_issue_details" />
+</navigation>
