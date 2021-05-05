@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Github Issues</string>
+    <string name="app_name">Kotlin Issues</string>
     <string name="issue_title_example">Issue Title Example</string>
     <string name="issue_status_example">closed</string>
     <string name="issue_created_at_example">2d</string>

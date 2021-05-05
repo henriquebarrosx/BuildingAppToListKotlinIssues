@@ -13,8 +13,8 @@ import androidx.annotation.RequiresApi
 import java.time.format.DateTimeFormatter
 import com.example.github_issues.entity.Issue
 import androidx.recyclerview.widget.RecyclerView
-import com.example.github_issues.IssueListDirections
 import kotlinx.android.synthetic.main.issue_item.view.*
+import com.example.github_issues.fragments.IssueListDirections
 
 class IssueAdapter(
         private val issues: MutableList<Issue>
