@@ -13,9 +13,10 @@ import com.example.github_issues.R
 import androidx.fragment.app.Fragment
 import android.annotation.SuppressLint
 import com.example.github_issues.entity.Issue
-import com.example.github_issues.adapter.IssueListAdapter
 import kotlinx.android.synthetic.main.issue_item.view.*
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.github_issues.adapter.IssueListAdapter
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_issue_list.*
 
 class IssueList : Fragment() {
@@ -39,6 +40,7 @@ class IssueList : Fragment() {
     private fun requestIssues(context: Context?) {
         val promise = OkHttpClient()
         val promiseURL = "https://api.github.com/repos/JetBrains/kotlin/issues"
+
         val promiseBuilder = Request.Builder().url(promiseURL).build()
 
         promise.newCall(promiseBuilder).enqueue(object : Callback {
@@ -47,12 +49,8 @@ class IssueList : Fragment() {
             }
 
             override fun onResponse(response: Response) {
-                val convert = GsonBuilder().create()
                 val responseStr = response.body().string()
-
-                val resJSON = convert
-                    .fromJson(responseStr, Array<Issue>::class.java)
-                    .toMutableList()
+                val resJSON = Gson().fromJson(responseStr, Array<Issue>::class.java).toMutableList()
 
                 activity?.runOnUiThread {
                     issueListAdapter = IssueListAdapter(resJSON)

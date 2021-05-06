@@ -40,7 +40,6 @@
         android:gravity="end"
         android:textSize="13sp"
         android:textColor="#424141"
-        android:letterSpacing="0.12"
         android:textAlignment="textEnd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
