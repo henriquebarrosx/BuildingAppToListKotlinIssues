@@ -16,9 +16,9 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.issue_item.view.*
 import com.example.github_issues.fragments.IssueListDirections
 
-class IssueAdapter(
+class IssueListAdapter(
         private val issues: MutableList<Issue>
-): RecyclerView.Adapter<IssueAdapter.IssueViewHolder>() {
+): RecyclerView.Adapter<IssueListAdapter.IssueViewHolder>() {
 
     class IssueViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 

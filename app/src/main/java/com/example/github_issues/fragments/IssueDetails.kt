@@ -26,7 +26,6 @@ class IssueDetails : Fragment() {
         )
 
         val issue = args.issueArgs
-        view.details_text.text = issue
 
         val navController = findNavController()
         NavigationUI.setupActionBarWithNavController(this.activity as AppCompatActivity, navController)

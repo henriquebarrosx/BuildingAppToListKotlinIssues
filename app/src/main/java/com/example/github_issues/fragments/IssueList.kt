@@ -13,13 +13,13 @@ import com.example.github_issues.R
 import androidx.fragment.app.Fragment
 import android.annotation.SuppressLint
 import com.example.github_issues.entity.Issue
-import com.example.github_issues.adapter.IssueAdapter
+import com.example.github_issues.adapter.IssueListAdapter
 import kotlinx.android.synthetic.main.issue_item.view.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_issue_list.*
 
 class IssueList : Fragment() {
-    private lateinit var issueAdapter: IssueAdapter
+    private lateinit var issueListAdapter: IssueListAdapter
 
     @SuppressLint("CheckResult")
     override fun onCreateView(
@@ -55,8 +55,8 @@ class IssueList : Fragment() {
                     .toMutableList()
 
                 activity?.runOnUiThread {
-                    issueAdapter = IssueAdapter(resJSON)
-                    rvIssueItems.adapter = issueAdapter
+                    issueListAdapter = IssueListAdapter(resJSON)
+                    rvIssueItems.adapter = issueListAdapter
                     rvIssueItems.layoutManager = LinearLayoutManager(context)
                 }
             }

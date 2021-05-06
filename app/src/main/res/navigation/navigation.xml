@@ -3,7 +3,8 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/navigation"
-  app:startDestination="@id/issueList">
+  app:startDestination="@id/issueList"
+  android:label="Issue">
     <fragment
       android:id="@+id/issueList"
       android:name="com.example.github_issues.fragments.IssueList"
@@ -19,7 +20,6 @@
     <fragment
       android:id="@+id/issueDetails"
       android:name="com.example.github_issues.fragments.IssueDetails"
-      android:label="Issue"
       tools:layout="@layout/fragment_issue_details">
 
         <action

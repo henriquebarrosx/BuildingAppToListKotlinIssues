@@ -7,6 +7,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="medium_gray">#bdbdbd</color>
+    <color name="gray">#e0e0e0</color>
+
     <color name="closed_issue">#ef9a9a</color>
     <color name="opened_issue">#a5d6a7</color>
+    <color name="link_color">#2196f3</color>
 </resources>
