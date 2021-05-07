@@ -4,11 +4,11 @@ import java.util.*
 import android.os.Bundle
 import android.view.View
 import java.io.IOException
+import com.google.gson.Gson
 import com.squareup.okhttp.*
 import android.view.ViewGroup
 import android.content.Context
 import android.view.LayoutInflater
-import com.google.gson.GsonBuilder
 import com.example.github_issues.R
 import androidx.fragment.app.Fragment
 import android.annotation.SuppressLint
@@ -16,7 +16,6 @@ import com.example.github_issues.entity.Issue
 import kotlinx.android.synthetic.main.issue_item.view.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.github_issues.adapter.IssueListAdapter
-import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_issue_list.*
 
 class IssueList : Fragment() {
